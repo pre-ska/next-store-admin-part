@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/form";
 import { Separator } from "@/components/ui/separator";
 import { Heading } from "@/components/ui/heading";
-
 import { useOrigin } from "@/hooks/use-origin";
 import { AlertModal } from "@/components/modals/alert-modal";
+import { ApiAlert } from "@/components/ui/api-alert";
 
 // ! form schema za validaciju - zod
 const formSchema = z.object({
@@ -117,6 +117,13 @@ export const SettingsForm: React.FC<SettingsFormProps> = ({ initialData }) => {
         </form>
       </Form>
       <Separator />
+
+      {/** ovo je za enviromet variablu NEXT_PUBLIC_API_URL da je vidim na UI i koristim npr u Vercelu */}
+      <ApiAlert
+        title="NEXT_PUBLIC_API_URL"
+        variant="public"
+        description={`${origin}/api/${params.storeId}`}
+      />
     </>
   );
 };
