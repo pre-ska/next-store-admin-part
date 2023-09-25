@@ -25,7 +25,7 @@ import {
 } from "@/components/ui/form";
 
 const formSchema = z.object({
-  name: z.string().min(2),
+  name: z.string().min(2).trim(),
   value: z.string().min(4).max(9).regex(/^#/, {
     message: "String must be a valid hex code",
   }),

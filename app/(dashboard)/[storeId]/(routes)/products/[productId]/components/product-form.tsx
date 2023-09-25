@@ -34,7 +34,7 @@ import ImageUpload from "@/components/ui/image-upload";
 import { Checkbox } from "@/components/ui/checkbox";
 
 const formSchema = z.object({
-  name: z.string().min(1),
+  name: z.string().min(1).trim(),
   images: z.object({ url: z.string() }).array(),
   price: z.coerce.number().min(1),
   categoryId: z.string().min(1),
@@ -107,7 +107,8 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       router.push(`/${params.storeId}/products`);
       toast.success(toastMessage);
     } catch (error: any) {
-      toast.error("Something went wrong.");
+      console.log(error);
+      toast.error(error?.response?.data || "Something went wrong");
     } finally {
       setLoading(false);
     }
@@ -122,7 +123,7 @@ export const ProductForm: React.FC<ProductFormProps> = ({
       router.push(`/${params.storeId}/products`);
       toast.success("Product deleted.");
     } catch (error: any) {
-      toast.error("Something went wrong.");
+      toast.error(error?.response?.statusText || "Something went wrong");
     } finally {
       setLoading(false);
       setOpen(false);
